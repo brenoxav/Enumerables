@@ -66,7 +66,7 @@ describe Enumerable do
     end
   end
 
-  describe 'my_any' do
+  describe '#my_any?' do
     it 'returns true if the block ever returns true' do
       expect(arr.my_any? { |e| e.is_a? Numeric }).to be_truthy
     end
@@ -79,5 +79,20 @@ describe Enumerable do
       expect([false, false, nil].my_any?).to be_falsy
     end
   end
+
+  describe '#my_none?' do
+    it 'returns true if the block never returns true' do
+      expect([nil, false].none?).to be_truthy  
+    end
+  end
+
+    it 'returns whether pattern === element for any collection member' do
+      expect(%w{ant bear cat}.none?(/d/)).to be_truthy
+    end
+
+  it 'returns true if all of the elements are false or nil' do
+    expect([false, false, nil].my_none?).to be_truthy
+  end
+
   
 end
