@@ -121,4 +121,24 @@ describe Enumerable do
       expect(arr.my_map(Enumerator)).to be_truthy
     end
   end
+
+  describe '#my_inject' do
+    it 'it Combines all elements of range by applying a binary operation' do
+      expect((5..10).my_inject(:+)).to eql(45)
+    end
+
+    it 'for each element in enum the block is passed an accumulator value (memo) and the element' do
+      expect(arr.inject(1) { |product, n| product * n }).to eql(120)
+    end
+
+    it 'it Combines all elements using a block and inject' do
+      expect(arr.inject { |sum, n| sum + n }).to eql(15)
+    end
+  end
+
+  describe 'multiply_els' do
+    it 'return the multiplication of array' do
+      expect(multiply_els(arr)).to eql(120)
+    end
+  end
 end
