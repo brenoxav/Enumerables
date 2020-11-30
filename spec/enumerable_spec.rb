@@ -48,7 +48,7 @@ describe Enumerable do
     end
 
     it 'returns a hash with matching values' do
-      expect(hash.my_select { |k, v| v == 'dos' }).to eql([[:two, 'dos']])
+      expect(hash.my_select { |_k, v| v == 'dos' }).to eql([[:two, 'dos']])
     end
   end
 
@@ -82,17 +82,43 @@ describe Enumerable do
 
   describe '#my_none?' do
     it 'returns true if the block never returns true' do
-      expect([nil, false].none?).to be_truthy  
+      expect([nil, false].none?).to be_truthy
     end
-  end
 
     it 'returns whether pattern === element for any collection member' do
-      expect(%w{ant bear cat}.none?(/d/)).to be_truthy
+      expect(%w[ant bear cat].none?(/d/)).to be_truthy
     end
 
-  it 'returns true if all of the elements are false or nil' do
-    expect([false, false, nil].my_none?).to be_truthy
+    it 'returns true if all of the elements are false or nil' do
+      expect([false, false, nil].my_none?).to be_truthy
+    end
   end
 
-  
+  describe '#my_count' do
+    it 'returns the number of items if no block or argument is passed' do
+      expect(arr.my_count).to eql(5)
+    end
+
+    it 'returns the number of items that are equal to the argument given' do
+      expect([1, 2, 3, 2, 4, 2].my_count(2)).to eql(3)
+    end
+
+    it 'returns the number of elements yielding a true value' do
+      expect([1, 2, 3, 2, 4, 2].my_count(&:even?)).to eql(4)
+    end
+  end
+
+  describe '#my_map' do
+    it 'returns a new array with the results of running block once for every element in the array' do
+      expect((1..4).my_map { |i| i**2 }).to eql([1, 4, 9, 16])
+    end
+
+    it 'returns a new array with the values of every element in the hash' do
+      expect(hash.my_map { |_k, v| v }).to eql(%w[uno dos tres])
+    end
+
+    it 'returns an Enumerator if no block is given' do
+      expect(arr.my_map(Enumerator)).to be_truthy
+    end
+  end
 end
