@@ -1,4 +1,4 @@
-require './enumerables'
+require_relative '../enumerables'
 
 describe Enumerable do
   let!(:arr) { [1, 2, 3, 4, 5] }

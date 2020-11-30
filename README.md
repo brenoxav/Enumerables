@@ -14,11 +14,13 @@ Reimplementation of the following Ruby Enumerable methods:
 - #count
 - #map
 - #inject
+- multiply_els
 
 ## Built With
 
 - Ruby
 - Rubocop
+- RSpec
 
 ## Getting Started
 
@@ -39,6 +41,18 @@ To get a local copy up and running follow these simple steps.
 - run Ruby passing the 'enumerables.rb' file
 ```ruby
 ruby enumerables.rb
+```
+
+### Run tests
+
+To run tests you need to have RSpec installed
+```
+gem install rspec
+```
+
+Go into the project's root directory and execute RSpec to run the tests
+```
+rspec
 ```
 
 ## Authors
